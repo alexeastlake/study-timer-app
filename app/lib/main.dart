@@ -1,3 +1,5 @@
+import 'package:app/SleepScreen.dart';
+import 'package:app/exerciseScreen.dart';
 import "package:flutter/material.dart";
 
 void main() {
@@ -14,13 +16,9 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      "0: Exercise",
-    ),
-    Text(
-      "1: Sleep",
-    ),
+  static const List<Widget> _pageOptions = <Widget>[
+    ExerciseScreen(),
+    SleepScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -37,7 +35,7 @@ class _AppState extends State<App> {
           title: const Text("Title Text"),
         ),
         body: Container(
-          child: _widgetOptions.elementAt(_selectedIndex),
+          child: _pageOptions.elementAt(_selectedIndex),
         ),
         bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
