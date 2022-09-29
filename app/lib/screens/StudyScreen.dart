@@ -10,7 +10,36 @@ class StudyScreen extends StatelessWidget {
       appBar: AppBar(
           title: const Text("Study"),
       ),
-      body: const Text("Study screen!"),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text(
+              "Time Remaining:"
+            ),
+            const Text(
+              "00:00"
+            ),
+            TextButton(
+              onPressed: (() {
+                print("Start Studying");
+              }),
+              child: const Text(
+                "Start Studying"
+              ),
+            ),
+            TextButton(
+              onPressed: (() {
+                print("Start Break");
+              }),
+              child: const Text(
+                "Start Break"
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
