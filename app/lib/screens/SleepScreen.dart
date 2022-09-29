@@ -6,8 +6,11 @@ class SleepScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Text("Sleep screen!"),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Sleep"),
+      ),
+      body: const Text("Sleep screen!"),
     );
   }
 }
