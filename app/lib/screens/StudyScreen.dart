@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
-import 'dart:async';
-
+import "dart:async";
+import "../utility/Controller.dart";
 import "package:flutter/material.dart";
 
 class StudyScreen extends StatefulWidget {
@@ -19,7 +19,9 @@ class _StudyScreenState extends State<StudyScreen> {
   Duration duration = const Duration(seconds: 1);
 
   void startStudyTimer() {
+    stopTimer();
     time = 45 * 60;
+    Controller.test();
     _timer = Timer.periodic(duration, (timer) {
       if (time == 0) {
         stopTimer();
@@ -32,7 +34,9 @@ class _StudyScreenState extends State<StudyScreen> {
   }
 
   void startBreakTimer() {
+    stopTimer();
     time = 15 * 60;
+    Controller.test();
     _timer = Timer.periodic(duration, (timer) {
       if (time == 0) {
         stopTimer();
