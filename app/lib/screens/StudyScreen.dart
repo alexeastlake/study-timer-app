@@ -29,6 +29,7 @@ class _StudyScreenState extends State<StudyScreen> {
     _timer = Timer.periodic(duration, (timer) {
       if (time == 0) {
         stopTimer();
+        completeStudyAlert();
       } else {
         setState(() {
           time--;
@@ -44,6 +45,7 @@ class _StudyScreenState extends State<StudyScreen> {
     _timer = Timer.periodic(duration, (timer) {
       if (time == 0) {
         stopTimer();
+        completeBreakAlert();
       } else {
         setState(() {
           time--;
@@ -88,6 +90,42 @@ class _StudyScreenState extends State<StudyScreen> {
     );
   }
 
+  void completeStudyAlert() {
+    showDialog(
+      context: context, 
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Study Finished"),
+          content: Text("You completed this study time."),
+          actions: [
+            TextButton(
+              onPressed: () {Navigator.pop(context);},
+              child: const Text("OK"),
+            )
+          ],
+        );
+      }
+    );
+  }
+
+  void completeBreakAlert() {
+    showDialog(
+      context: context, 
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Break Finished"),
+          content: Text("You completed this break time."),
+          actions: [
+            TextButton(
+              onPressed: () {Navigator.pop(context);},
+              child: const Text("OK"),
+            )
+          ],
+        );
+      }
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,21 +134,31 @@ class _StudyScreenState extends State<StudyScreen> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
-              "Time Remaining:"
+              "Time Remaining:",
+              style: TextStyle(
+                fontSize: 25
+              ),
             ),
             Text(
-              "${Duration(seconds: time).inMinutes}:${time % 60}"
+              "${Duration(seconds: time).inMinutes}:${time % 60}",
+              style: const TextStyle(
+                fontSize: 35,
+              ),
             ),
             TextButton(
               onPressed: (() {
                 startStudyTimer();
               }),
               child: const Text(
-                "Start Studying"
+                "Start Studying",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             TextButton(
@@ -118,7 +166,11 @@ class _StudyScreenState extends State<StudyScreen> {
                 startBreakTimer();
               }),
               child: const Text(
-                "Start Break"
+                "Start Break",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ],
