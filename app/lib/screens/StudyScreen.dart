@@ -2,7 +2,7 @@
 import "dart:async";
 import "../utility/Controller.dart";
 import "package:flutter/material.dart";
-import 'package:sensors_plus/sensors_plus.dart';
+import 'package:motion_sensors/motion_sensors.dart';
 
 class StudyScreen extends StatefulWidget {
   const StudyScreen({super.key});
@@ -60,8 +60,10 @@ class _StudyScreenState extends State<StudyScreen> {
   }
 
   void startGyro() {
-    gyroListener = gyroscopeEvents.listen((GyroscopeEvent event) {
-      if (event.x > 1 || event.y > 1 || event.z > 1) {
+    motionSensors.gyroscopeUpdateInterval = 2500;
+
+    gyroListener = motionSensors.gyroscope.listen((GyroscopeEvent event) {
+      if (event.x > 0.5 || event.y > 0.5 || event.z > 0.5) {
         stopTimer();
         movementAlert();
       }
