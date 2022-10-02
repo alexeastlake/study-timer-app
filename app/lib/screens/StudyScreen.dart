@@ -15,19 +15,35 @@ class _StudyScreenState extends State<StudyScreen> {
   // !!Change later, only short time for development!!
   int studyMins = 1;
   int breakMins = 1;
+  int startTime = 0;
   int time = 0;
   Timer? _timer;
   Duration duration = const Duration(seconds: 1);
   StreamSubscription? gyroListener;
 
-  void startTimer(int mins) {
+  void startStudyTimer() {
     stopTimer();
-    time = mins * 60;
+    time = studyMins * 60;
+    startTime = studyMins * 60;
     startGyro();
     _timer = Timer.periodic(duration, (timer) {
       if (time == 0) {
         stopTimer();
-        stopGyro();
+      } else {
+        setState(() {
+          time--;
+        });
+      }
+    });
+  }
+
+  void startBreakTimer() {
+    stopTimer();
+    time = breakMins * 60;
+    startTime = studyMins * 60;
+    _timer = Timer.periodic(duration, (timer) {
+      if (time == 0) {
+        stopTimer();
       } else {
         setState(() {
           time--;
@@ -38,13 +54,13 @@ class _StudyScreenState extends State<StudyScreen> {
 
   void stopTimer() {
     _timer?.cancel();
+    stopGyro();
   }
 
   void startGyro() {
     gyroListener = gyroscopeEvents.listen((GyroscopeEvent event) {
       if (event.x > 1 || event.y > 1 || event.z > 1) {
         stopTimer();
-        stopGyro();
         movementAlert();
       }
     });
@@ -59,8 +75,8 @@ class _StudyScreenState extends State<StudyScreen> {
       context: context, 
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("Stop Timer"),
-          content: const Text("Timer is stopped"),
+          title: const Text("Timer Stopped"),
+          content: Text("You studied for ${100 - (time / startTime * 100).toInt()}% of your total study time."),
           actions: [
             TextButton(
               onPressed: () {Navigator.pop(context);},
@@ -91,7 +107,7 @@ class _StudyScreenState extends State<StudyScreen> {
             ),
             TextButton(
               onPressed: (() {
-                startTimer(studyMins);
+                startStudyTimer();
               }),
               child: const Text(
                 "Start Studying"
@@ -99,7 +115,7 @@ class _StudyScreenState extends State<StudyScreen> {
             ),
             TextButton(
               onPressed: (() {
-                startTimer(breakMins);
+                startBreakTimer();
               }),
               child: const Text(
                 "Start Break"
