@@ -2,9 +2,14 @@ import 'package:app/utility/Controller.dart';
 import 'package:app/screens/SleepScreen.dart';
 import 'package:app/screens/StudyScreen.dart';
 import "package:flutter/material.dart";
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
-  runApp(App());
+Future<void> main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const App());
 }
 
 class App extends StatefulWidget {
