@@ -16,4 +16,32 @@ class Controller {
     
     db.collection("sleep").add(minutes);
   }
+
+  static Future<int> getAverageStudyPercent() {
+    return db.collection("study").get().then((QuerySnapshot querySnapshot) {
+      int sum = 0;
+
+      for (var element in querySnapshot.docs) {
+        sum += element.get("percentage") as int;
+      }
+
+      return (sum / querySnapshot.size).round();
+    });
+  }
+
+  static Future<int> getAverageSleepTime() {
+    return db.collection("sleep").get().then((QuerySnapshot querySnapshot) {
+      int sum = 0;
+
+      for (var element in querySnapshot.docs) {
+        sum += element.get("minutes") as int;
+      }
+
+      return (sum / querySnapshot.size).round();
+    });
+  }
+
+  static void clearData() {
+    //Need to implement
+  }
 }
