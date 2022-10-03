@@ -3,6 +3,8 @@ import 'dart:async';
 import "package:flutter/material.dart";
 import 'package:motion_sensors/motion_sensors.dart';
 
+import '../utility/Controller.dart';
+
 class SleepScreen extends StatefulWidget {
   const SleepScreen({super.key});
 
@@ -56,7 +58,10 @@ class _SleepScreenState extends State<SleepScreen> {
           content: Text("You slept for ${Duration(seconds: time).inMinutes}:${time % 60}."),
           actions: [
             TextButton(
-              onPressed: () {Navigator.pop(context);},
+              onPressed: () {
+                Navigator.pop(context);
+                Controller.addSleep(Duration(seconds: time).inMinutes);
+              },
               child: const Text("OK"),
             )
           ],

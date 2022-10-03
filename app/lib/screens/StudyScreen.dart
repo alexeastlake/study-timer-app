@@ -83,7 +83,10 @@ class _StudyScreenState extends State<StudyScreen> {
           content: Text("You studied for ${100 - (time / startTime * 100).toInt()}% of your total study time."),
           actions: [
             TextButton(
-              onPressed: () {Navigator.pop(context);},
+              onPressed: () {
+                Navigator.pop(context);
+                Controller.addStudy(100 - (time / startTime * 100).toInt());
+              },
               child: const Text("OK"),
             )
           ],
