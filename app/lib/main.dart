@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:app/utility/Controller.dart';
 import 'package:app/screens/SleepScreen.dart';
 import 'package:app/screens/StudyScreen.dart';
+import 'package:app/screens/StatsScreen.dart';
 import "package:flutter/material.dart";
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -29,6 +30,7 @@ class _AppState extends State<App> {
   static const List<Widget> _pageOptions = <Widget>[
     StudyScreen(),
     SleepScreen(),
+    StatsScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -53,6 +55,10 @@ class _AppState extends State<App> {
             BottomNavigationBarItem(
               icon: Icon(Icons.bedtime),
               label: "Sleep",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.show_chart),
+              label: "Stats",
             ),
           ],
           currentIndex: _selectedIndex,
