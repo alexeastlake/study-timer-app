@@ -15,7 +15,6 @@ class _StatsScreenState extends State<StatsScreen> {
   int sleepTime = 0;
 
   void clear() {
-    // Need to implement
     Controller.clearData();
 
     setState(() {

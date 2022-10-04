@@ -25,6 +25,10 @@ class Controller {
         sum += element.get("percentage") as int;
       }
 
+      if (sum == 0) {
+        return 0;
+      }
+
       return (sum / querySnapshot.size).round();
     });
   }
@@ -37,11 +41,25 @@ class Controller {
         sum += element.get("minutes") as int;
       }
 
+      if (sum == 0) {
+        return 0;
+      }
+
       return (sum / querySnapshot.size).round();
     });
   }
 
   static void clearData() {
-    //Need to implement
+    db.collection("study").get().then((result) {
+      for (DocumentSnapshot snapshot in result.docs) {
+        snapshot.reference.delete();
+      }
+    });
+
+    db.collection("sleep").get().then((result) {
+      for (DocumentSnapshot snapshot in result.docs) {
+        snapshot.reference.delete();
+      }
+    });
   }
 }
