@@ -12,9 +12,8 @@ class StudyScreen extends StatefulWidget {
 }
 
 class _StudyScreenState extends State<StudyScreen> {
-  // !!Change later, only short time for development!!
-  int studyMins = 1;
-  int breakMins = 1;
+  int studyMins = 45;
+  int breakMins = 15;
   int startTime = 0;
   int time = 0;
   Timer? _timer;
@@ -27,7 +26,7 @@ class _StudyScreenState extends State<StudyScreen> {
     startTime = studyMins * 60;
     startGyro();
     _timer = Timer.periodic(duration, (timer) {
-      if (time == 0) {
+      if (time < 0) {
         stopTimer();
         completeStudyAlert();
       } else {
