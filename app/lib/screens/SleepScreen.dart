@@ -18,6 +18,7 @@ class _SleepScreenState extends State<SleepScreen> {
   Duration duration = const Duration(seconds: 1);
   StreamSubscription? gyroListener;
 
+  // Starts the sleep timer and gyro listener
   void startSleepTimer() {
     stopTimer();
     time = 0;
@@ -29,11 +30,13 @@ class _SleepScreenState extends State<SleepScreen> {
     });
   }
 
+  // Stops the sleep timer and gyro listener
   void stopTimer() {
     _timer?.cancel();
     stopGyro();
   }
 
+  // Starts the gyro listener
   void startGyro() {
     motionSensors.gyroscopeUpdateInterval = 2500;
 
@@ -45,10 +48,12 @@ class _SleepScreenState extends State<SleepScreen> {
     });
   }
 
+  // Stops the gyro listener
   void stopGyro() {
     gyroListener?.cancel();
   }
 
+  // Makes a dialog message when the phone is moved
   void movementAlert() {
     showDialog(
       context: context, 
@@ -70,6 +75,7 @@ class _SleepScreenState extends State<SleepScreen> {
     );
   }
   
+  // Displays the screen
   @override
   Widget build(BuildContext context) {
     return Scaffold(

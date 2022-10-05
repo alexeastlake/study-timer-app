@@ -14,6 +14,7 @@ class _StatsScreenState extends State<StatsScreen> {
   int studyPercent = 0;
   int sleepTime = 0;
 
+  // Clears the stats fields
   void clear() {
     Controller.clearData();
 
@@ -23,6 +24,7 @@ class _StatsScreenState extends State<StatsScreen> {
     });
   }
 
+  // Refreshes the stats fields from Firebase
   void refresh() {
     setState(() {
       Controller.getAverageStudyPercent().then((value) {
@@ -34,6 +36,8 @@ class _StatsScreenState extends State<StatsScreen> {
       });
     }); 
   }
+
+  // Displays the screen
   @override
   Widget build(BuildContext context) {
     refresh();

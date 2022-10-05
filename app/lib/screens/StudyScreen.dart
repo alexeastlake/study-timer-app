@@ -20,6 +20,7 @@ class _StudyScreenState extends State<StudyScreen> {
   Duration duration = const Duration(seconds: 1);
   StreamSubscription? gyroListener;
 
+  // Starts the study timer and gyro listener
   void startStudyTimer() {
     stopTimer();
     time = studyMins * 60;
@@ -37,6 +38,7 @@ class _StudyScreenState extends State<StudyScreen> {
     });
   }
 
+  // Starts the break timer without gyro listener
   void startBreakTimer() {
     stopTimer();
     time = breakMins * 60;
@@ -53,11 +55,13 @@ class _StudyScreenState extends State<StudyScreen> {
     });
   }
 
+  // Stops the current timer and gyro listener
   void stopTimer() {
     _timer?.cancel();
     stopGyro();
   }
 
+  // Starts the gyro listener
   void startGyro() {
     motionSensors.gyroscopeUpdateInterval = 2500;
 
@@ -69,10 +73,12 @@ class _StudyScreenState extends State<StudyScreen> {
     });
   }
 
+  // Stops the gyro listener
   void stopGyro() {
     gyroListener?.cancel();
   }
 
+  // Shows a dialog message when movement is detected
   void movementAlert() {
     showDialog(
       context: context, 
@@ -94,6 +100,7 @@ class _StudyScreenState extends State<StudyScreen> {
     );
   }
 
+  // Shows a dialog message when the study timer finishes
   void completeStudyAlert() {
     showDialog(
       context: context, 
@@ -103,7 +110,10 @@ class _StudyScreenState extends State<StudyScreen> {
           content: Text("You completed this study time."),
           actions: [
             TextButton(
-              onPressed: () {Navigator.pop(context);},
+              onPressed: () {
+                Navigator.pop(context);
+                Controller.addStudy(100);
+              },
               child: const Text("OK"),
             )
           ],
@@ -112,6 +122,7 @@ class _StudyScreenState extends State<StudyScreen> {
     );
   }
 
+  // Shows a dialog message when the break timer finishes
   void completeBreakAlert() {
     showDialog(
       context: context, 
@@ -130,6 +141,7 @@ class _StudyScreenState extends State<StudyScreen> {
     );
   }
 
+  // Displays the screen
   @override
   Widget build(BuildContext context) {
     return Scaffold(
