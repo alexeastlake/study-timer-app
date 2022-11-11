@@ -1,16 +1,9 @@
-# app
+# Study Timer App
 
-A new Flutter project.
+Created using Flutter and Firebase for storage.
 
-## Getting Started
+This app is to help a user stick to the study technique of 45 minutes of studying then 15 minutes of break by timing the different sections. The app detects if the phone moves while studying and alerts the user that they broke their study time by going on their phone.
 
-This project is a starting point for a Flutter application.
+This app also helps a user detect how long they sleep for using a timer that stops when it detects the phone moving.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+It also stores and presents statistics about the users average study and sleep times to help the user improve upon these aspects.
